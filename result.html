@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hasil Kelulusan</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                min-height: 100vh;
+                font-family: Arial, sans-serif;
+                background: linear-gradient(180deg, #fff6e8 0%, #ffe4ef 100%);
+                color: #172554;
+                padding: 20px;
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+            }
+
+            .wrap {
+                width: 100%;
+                max-width: 760px;
+            }
+
+            .card {
+                background: #ffffff;
+                border: 1px solid #f1f5f9;
+                border-radius: 8px;
+                box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
+                padding: 24px;
+            }
+
+            h1 {
+                margin: 0 0 14px;
+                font-size: 30px;
+                line-height: 1.2;
+                color: #14532d;
+            }
+
+            .student {
+                margin: 0 0 18px;
+                font-size: 18px;
+                line-height: 1.55;
+                color: #0f172a;
+            }
+
+            .student div {
+                margin: 2px 0;
+            }
+
+            .lulustext {
+                letter-spacing: 6px;
+                font-weight: 800;
+            }
+
+            h2 {
+                margin: 22px 0 10px;
+                font-size: 24px;
+                line-height: 1.25;
+                color: #991b1b;
+            }
+
+            p {
+                margin: 0 0 14px;
+                font-size: 16px;
+                line-height: 1.6;
+                color: #334155;
+            }
+
+            ol {
+                margin: 0;
+                padding-left: 24px;
+                color: #1e293b;
+            }
+
+            li {
+                margin: 6px 0;
+                line-height: 1.6;
+            }
+
+            .actions {
+                margin-top: 20px;
+            }
+
+            .btn {
+                display: inline-block;
+                text-decoration: none;
+                color: #ffffff;
+                background: #2563eb;
+                border-radius: 8px;
+                padding: 10px 16px;
+                font-weight: 700;
+                font-size: 14px;
+            }
+
+            @media (max-width: 480px) {
+                body {
+                    padding: 12px;
+                }
+
+                .card {
+                    padding: 18px;
+                }
+
+                h1 {
+                    font-size: 24px;
+                }
+
+                h2 {
+                    font-size: 20px;
+                }
+
+                .student {
+                    font-size: 16px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main class="wrap">
+            <section class="card">
+                <h1>SELAMAT! ANDA DINYATAKAN LULUS</h1>
+
+                <div class="student">
+                    <div>Nama : <strong id="namaValue">-</strong></div>
+                    <div>NISN : <strong id="nisnValue">-</strong></div>
+                    <div>Kelas : <strong id="kelasValue">-</strong></div>
+                    <div>
+                        Keterangan :
+                        <strong class="lulustext" id="keteranganValue"
+                            >L U L U S</strong
+                        >
+                    </div>
+                </div>
+
+                <h2>IMBAUAN KEPADA SELURUH SISWA</h2>
+                <p>
+                    Kami mengucapkan selamat atas kelulusan yang telah kalian
+                    capai setelah tiga tahun menimba ilmu. Sebagai bentuk rasa
+                    syukur, sekolah dengan tegas mengimbau siswa untuk:
+                </p>
+                <ol>
+                    <li>
+                        TIDAK melakukan aksi corat-coret seragam sekolah.
+                    </li>
+                    <li>
+                        TIDAK melakukan konvoi kendaraan di jalan raya yang
+                        dapat membahayakan diri sendiri dan pengguna jalan
+                        lain.
+                    </li>
+                    <li>
+                        Sebaiknya seragam yang tidak terpakai disumbangkan
+                        kepada adik kelas atau pihak lain yang lebih
+                        membutuhkan.
+                    </li>
+                </ol>
+
+                <div class="actions">
+                    <a class="btn" href="./index.html">Kembali ke Halaman Awal</a>
+                </div>
+            </section>
+        </main>
+
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            const nama = params.get("nama") || "-";
+            const nisn = params.get("nisn") || "-";
+            const kelas = params.get("kelas") || "-";
+            const status = (params.get("status") || "LULUS").toUpperCase();
+
+            document.getElementById("namaValue").textContent = nama;
+            document.getElementById("nisnValue").textContent = nisn;
+            document.getElementById("kelasValue").textContent = kelas;
+            document.getElementById("keteranganValue").textContent =
+                status === "LULUS" ? "L U L U S" : status;
+        </script>
+    </body>
+</html>

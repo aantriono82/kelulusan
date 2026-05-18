@@ -907,6 +907,7 @@
         </div>
 
         <script>
+            const namaInput = document.getElementById("namaInput");
             const nisnInput = document.getElementById("nisnInput");
             const searchBtn = document.getElementById("searchBtn");
             const statusText = document.getElementById("statusText");
@@ -1043,6 +1044,42 @@
                 resultBox.innerHTML = "";
             }
 
+            function openResultPage(student, queryNisn) {
+                const nameKey = findKey(student, [
+                    "nama",
+                    "nama siswa",
+                    "nama peserta",
+                ]);
+                const statusKey = findKey(student, [
+                    "status",
+                    "kelulusan",
+                    "status kelulusan",
+                    "keterangan lulus",
+                ]);
+                const classKey = findKey(student, ["kelas"]);
+                const schoolKey = findKey(student, ["sekolah", "nama sekolah"]);
+
+                const name = nameKey ? String(student[nameKey] || "").trim() : "";
+                const kelas = classKey ? String(student[classKey] || "").trim() : "";
+                const sekolah = schoolKey
+                    ? String(student[schoolKey] || "").trim()
+                    : "";
+                const rawStatus = statusKey
+                    ? String(student[statusKey] || "").trim()
+                    : "";
+                const status = rawStatus || "LULUS";
+
+                const params = new URLSearchParams({
+                    nama: name || "-",
+                    nisn: queryNisn || "-",
+                    kelas: kelas || "-",
+                    sekolah: sekolah || "-",
+                    status: status || "LULUS",
+                });
+
+                window.location.href = `./result.html?${params.toString()}`;
+            }
+
             function setLoadedData(rows, detectedNisnKey) {
                 if (!rows.length) {
                     students = [];
@@ -1118,6 +1155,15 @@
                     return;
                 }
 
+                const inputNama = String(namaInput.value || "").trim();
+                if (!inputNama) {
+                    renderResult(
+                        "error",
+                        "<h2>Nama kosong</h2><p>Masukkan nama terlebih dahulu.</p>",
+                    );
+                    return;
+                }
+
                 const student = students.find(
                     (row) => normalizeNisn(row[nisnKeyName]) === query,
                 );
@@ -1129,43 +1175,7 @@
                     return;
                 }
 
-                const nameKey = findKey(student, [
-                    "nama",
-                    "nama siswa",
-                    "nama peserta",
-                ]);
-                const statusKey = findKey(student, [
-                    "status",
-                    "kelulusan",
-                    "status kelulusan",
-                    "keterangan lulus",
-                ]);
-                const classKey = findKey(student, ["kelas"]);
-                const schoolKey = findKey(student, ["sekolah", "nama sekolah"]);
-
-                const name = nameKey ? student[nameKey] : "-";
-                const rawStatus = statusKey
-                    ? String(student[statusKey] || "").trim()
-                    : "";
-                const status = rawStatus || "LULUS";
-                const kelas = classKey ? student[classKey] : "-";
-                const sekolah = schoolKey ? student[schoolKey] : "-";
-                const statusDisplay = `<strong>${status}</strong>`;
-
-                renderResult(
-                    "success",
-                    `
-          <h2>Hasil Pencarian</h2>
-          <div class="result-status">Status Kelulusan: ${statusDisplay}</div>
-          <ul>
-            <li><strong>NISN:</strong> ${query}</li>
-            <li><strong>Nama:</strong> ${name}</li>
-            <li><strong>Kelas:</strong> ${kelas}</li>
-            <li><strong>Sekolah:</strong> ${sekolah}</li>
-            <li><strong>Status Kelulusan:</strong> ${statusDisplay}</li>
-          </ul>
-        `,
-                );
+                openResultPage(student, query);
             });
 
             autoLoadDefaultCsv();
