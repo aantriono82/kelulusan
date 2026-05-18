@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pengumuman Kelulusan SMP Kelas 9</title>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --border: #cbd5e1;
+      --success-bg: #ecfeff;
+      --success-text: #155e75;
+      --danger-bg: #fef2f2;
+      --danger-text: #991b1b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .phone {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 40px;
+      background: linear-gradient(180deg, #5b21b6 0%, #6d28d9 100%);
+      padding: 10px;
+      box-shadow: 0 20px 40px rgba(30, 41, 59, 0.22);
+      position: relative;
+    }
+
+    .app {
+      width: 100%;
+      min-height: 740px;
+      background:
+        radial-gradient(240px 180px at 20% 10%, #f8b24a 0%, #f39a32 58%, rgba(243, 154, 50, 0) 59%),
+        radial-gradient(280px 230px at 88% 45%, rgba(227, 0, 114, 0.96) 0%, rgba(227, 0, 114, 0) 64%),
+        radial-gradient(250px 190px at 24% 88%, rgba(76, 87, 196, 0.95) 0%, rgba(76, 87, 196, 0) 66%),
+        linear-gradient(155deg, #f6a236 0%, #ef8f31 25%, #cf2c6f 50%, #812aa8 72%, #4848b4 100%);
+      border: 2px solid #1e3a8a;
+      border-radius: 30px;
+      position: relative;
+      overflow: hidden;
+      padding: 102px 24px 118px;
+    }
+
+    .iphone-status {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 4;
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      pointer-events: none;
+    }
+
+    .island {
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 30px;
+      background: #0f172a;
+      border-radius: 20px;
+      z-index: 4;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+
+    .island::before {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #38bdf8 0%, #0ea5e9 30%, #0f172a 70%);
+      top: 11px;
+      left: 28px;
+      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.25);
+    }
+
+    .island::after {
+      content: "";
+      position: absolute;
+      width: 34px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.2);
+      top: 12px;
+      right: 18px;
+    }
+
+    .status-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .signal {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 12px;
+    }
+
+    .signal span {
+      width: 2px;
+      background: #fff;
+      border-radius: 2px;
+      opacity: 0.95;
+    }
+
+    .signal span:nth-child(1) { height: 4px; }
+    .signal span:nth-child(2) { height: 6px; }
+    .signal span:nth-child(3) { height: 9px; }
+    .signal span:nth-child(4) { height: 12px; }
+
+    .wifi {
+      width: 14px;
+      height: 10px;
+      border: 2px solid transparent;
+      border-top-color: #fff;
+      border-radius: 50%;
+      position: relative;
+      transform: translateY(1px);
+    }
+
+    .wifi::before,
+    .wifi::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 2px solid transparent;
+      border-top-color: #fff;
+      border-radius: 50%;
+    }
+
+    .wifi::before {
+      top: 1px;
+      width: 9px;
+      height: 7px;
+    }
+
+    .wifi::after {
+      top: 3px;
+      width: 4px;
+      height: 4px;
+    }
+
+    .battery {
+      width: 22px;
+      height: 11px;
+      border: 1.8px solid #fff;
+      border-radius: 3px;
+      position: relative;
+    }
+
+    .battery::before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 14px;
+      height: 5px;
+      background: #fff;
+      border-radius: 1px;
+    }
+
+    .battery::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      right: -4px;
+      width: 2px;
+      height: 4px;
+      background: #fff;
+      border-radius: 1px;
+    }
+
+    .shape-top-left,
+    .shape-top-right,
+    .shape-bottom {
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    .shape-top-left { display: none; }
+    .shape-top-right { display: none; }
+    .shape-bottom { display: none; }
+
+    .wallpaper-wave {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.85;
+    }
+
+    .wave-left {
+      width: 250px;
+      height: 300px;
+      left: -88px;
+      bottom: 72px;
+      border-radius: 48% 52% 40% 60%;
+      background: linear-gradient(180deg, rgba(26, 42, 120, 0.95) 0%, rgba(90, 71, 198, 0.88) 100%);
+      transform: rotate(24deg);
+    }
+
+    .wave-mid {
+      width: 225px;
+      height: 190px;
+      left: 78px;
+      bottom: 46px;
+      border-radius: 57% 43% 56% 44%;
+      background: linear-gradient(180deg, rgba(74, 87, 197, 0.92) 0%, rgba(105, 82, 214, 0.88) 100%);
+      transform: rotate(-16deg);
+    }
+
+    .page-dots {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 102px;
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .page-dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .page-dots span.active {
+      width: 16px;
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .ios-search {
+      position: relative;
+      z-index: 2;
+      margin: 0 auto 10px;
+      width: 84%;
+      height: 34px;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #c7d2e1;
+      color: #64748b;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .ios-search-icon {
+      width: 12px;
+      height: 12px;
+      border: 2px solid #64748b;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .ios-search-icon::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 6px;
+      background: #64748b;
+      border-radius: 2px;
+      right: -5px;
+      bottom: -3px;
+      transform: rotate(-40deg);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      line-height: 1.3;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      color: #f8fafc;
+      text-shadow: 0 1px 8px rgba(15, 23, 42, 0.35);
+    }
+
+    p {
+      margin: 0 0 10px;
+      color: rgba(241, 245, 249, 0.95);
+      font-size: 14px;
+      line-height: 1.4;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 10px;
+      position: relative;
+      z-index: 3;
+    }
+
+    label {
+      display: none;
+    }
+
+    input[type="text"] {
+      width: 92%;
+      display: block;
+      margin: 0 auto;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 20px;
+      color: #ffffff;
+      background: linear-gradient(90deg, rgba(124, 58, 237, 0.98) 0%, rgba(109, 40, 217, 0.99) 100%);
+      text-align: center;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 8px 18px rgba(17, 24, 39, 0.22);
+      position: relative;
+      z-index: 3;
+    }
+
+    input[type="text"]::placeholder {
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    input[type="text"]:focus {
+      outline: 3px solid #93c5fd;
+      outline-offset: 2px;
+    }
+
+    button {
+      margin: 14px auto 0;
+      width: 64%;
+      display: block;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(63, 163, 240, 0.96) 0%, rgba(42, 146, 234, 0.98) 100%);
+      color: #fff;
+      font-size: 19px;
+      font-weight: 700;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: filter 0.15s ease;
+      display: block;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 10px 22px rgba(17, 24, 39, 0.25);
+      position: relative;
+      z-index: 3;
+    }
+
+    button:hover {
+      filter: brightness(0.96);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .avatar-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 14px 0 10px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .avatar {
+      width: 96px;
+      height: auto;
+      max-height: 96px;
+      object-fit: contain;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+    }
+
+    .helper-link {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 13px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .helper-link a {
+      color: #fce7f3;
+      text-decoration: none;
+      font-weight: 700;
+      text-shadow: 0 1px 4px rgba(15, 23, 42, 0.5);
+    }
+
+    .helper-link a:hover {
+      text-decoration: underline;
+    }
+
+    .status {
+      margin-top: 12px;
+      font-size: 13px;
+      color: rgba(241, 245, 249, 0.95);
+      text-align: center;
+      position: relative;
+      z-index: 3;
+    }
+
+    .result {
+      margin-top: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      padding: 12px;
+      display: none;
+      position: relative;
+      z-index: 3;
+    }
+
+    .result.success {
+      background: var(--success-bg);
+      color: var(--success-text);
+      border-color: #a7f3d0;
+      display: block;
+    }
+
+    .result.error {
+      background: var(--danger-bg);
+      color: var(--danger-text);
+      border-color: #fecaca;
+      display: block;
+    }
+
+    .result h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .result ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .result li {
+      margin: 4px 0;
+    }
+
+    .ios-dock {
+      position: absolute;
+      left: 34px;
+      right: 34px;
+      bottom: 26px;
+      height: 60px;
+      border-radius: 19px;
+      background: linear-gradient(180deg, #ff00b8 0%, #e20093 100%);
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      box-shadow: 0 10px 20px rgba(236, 72, 153, 0.35);
+    }
+
+    .dock-item {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dock-phone { background: linear-gradient(180deg, #2ef16b, #12be4a); }
+    .dock-safari { background: linear-gradient(180deg, #7dd3fc, #2563eb); }
+    .dock-msg { background: linear-gradient(180deg, #4ade80, #22c55e); }
+    .dock-itunes { background: linear-gradient(180deg, #f9a8d4, #ec4899); }
+
+    .dock-phone::before {
+      content: "✆";
+      color: #fff;
+      font-size: 21px;
+      transform: rotate(-12deg);
+    }
+
+    .dock-safari::before {
+      content: "";
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 45% 45%, #93c5fd 0%, #dbeafe 32%, #60a5fa 58%, #2563eb 100%);
+      box-shadow: inset 0 0 0 2px #ffffff;
+    }
+
+    .dock-safari::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 11px;
+      background: #ef4444;
+      transform: rotate(40deg);
+      border-radius: 2px;
+    }
+
+    .dock-msg::before {
+      content: "";
+      width: 24px;
+      height: 18px;
+      border-radius: 11px;
+      background: #fff;
+      position: relative;
+    }
+
+    .dock-msg::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      bottom: 8px;
+      right: 8px;
+      clip-path: polygon(100% 100%, 0 100%, 100% 0);
+    }
+
+    .dock-itunes::before {
+      content: "♪";
+      color: #fff;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    @media (max-width: 420px) {
+      .phone {
+        max-width: 340px;
+      }
+
+      .app {
+        padding: 82px 18px 24px;
+      }
+
+      .ios-dock {
+        left: 28px;
+        right: 28px;
+      }
+
+      h1 {
+        font-size: 18px;
+      }
+
+      p {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+  <div class="iphone-status">
+    <div>12:00</div>
+    <div class="status-right">
+      <div class="signal"><span></span><span></span><span></span><span></span></div>
+      <div class="wifi"></div>
+      <div class="battery"></div>
+    </div>
+  </div>
+  <div class="island" aria-hidden="true"></div>
+  <main class="app">
+    <div class="shape-top-left"></div>
+    <div class="shape-top-right"></div>
+    <div class="shape-bottom"></div>
+    <div class="wallpaper-wave wave-left"></div>
+    <div class="wallpaper-wave wave-mid"></div>
+    <div class="ios-search"><span class="ios-search-icon"></span>Search</div>
+
+    <h1>Pengumuman Kelulusan<br>Kelas 9<br>SMP Negeri 2 Bangunrejo</h1>
+    <p>Masukkan data untuk melihat informasi kelulusan.</p>
+
+    <div class="avatar-wrap">
+      <img class="avatar" src="./logosmpn2bare.png" alt="Logo SMP Negeri 2 Bangunrejo" />
+    </div>
+
+    <div class="grid">
+      <div>
+        <label for="namaInput">Nama</label>
+        <input id="namaInput" type="text" placeholder="Nama" />
+      </div>
+      <div>
+        <label for="nisnInput">NISN</label>
+        <input id="nisnInput" type="text" inputmode="numeric" placeholder="NISN" />
+      </div>
+    </div>
+
+    <button id="searchBtn">Cari</button>
+    <div class="helper-link">
+      <a href="https://wa.me/6282376636929" target="_blank" rel="noopener noreferrer">Lupa NISN</a>
+    </div>
+
+    <div id="statusText" class="status">Memuat data kelulusan...</div>
+    <section id="resultBox" class="result"></section>
+    <div class="page-dots" aria-hidden="true">
+      <span></span><span class="active"></span><span></span>
+    </div>
+    <div class="ios-dock" aria-hidden="true">
+      <div class="dock-item dock-phone"></div>
+      <div class="dock-item dock-safari"></div>
+      <div class="dock-item dock-msg"></div>
+      <div class="dock-item dock-itunes"></div>
+    </div>
+  </main>
+  </div>
+
+  <script>
+    const nisnInput = document.getElementById("nisnInput");
+    const searchBtn = document.getElementById("searchBtn");
+    const statusText = document.getElementById("statusText");
+    const resultBox = document.getElementById("resultBox");
+
+    let students = [];
+    let nisnKeyName = "";
+
+    function cleanKey(key) {
+      return String(key || "").trim().toLowerCase();
+    }
+
+    function normalizeNisn(value) {
+      const digits = String(value || "").replace(/\D/g, "");
+      const trimmed = digits.replace(/^0+/, "");
+      return trimmed || "0";
+    }
+
+    function findKey(obj, aliases) {
+      const entries = Object.keys(obj || {});
+      for (const k of entries) {
+        const ck = cleanKey(k);
+        if (aliases.includes(ck)) return k;
+      }
+      return "";
+    }
+
+    function findHeaderIndex(matrix) {
+      for (let i = 0; i < matrix.length; i++) {
+        const row = matrix[i] || [];
+        const normalized = row.map((c) => cleanKey(c));
+        if (normalized.includes("nisn")) return i;
+      }
+      return -1;
+    }
+
+    function buildRowsFromMatrix(matrix) {
+      const headerIndex = findHeaderIndex(matrix);
+      if (headerIndex < 0) return { rows: [], nisnHeader: "" };
+
+      const headerRow = matrix[headerIndex];
+      const nisnColIndex = headerRow.findIndex((c) => cleanKey(c) === "nisn");
+      if (nisnColIndex < 0) return { rows: [], nisnHeader: "" };
+
+      let descriptorRow = [];
+      for (let r = headerIndex - 1; r >= 0; r--) {
+        const candidate = matrix[r] || [];
+        const nonEmpty = candidate.filter((c) => String(c || "").trim() !== "").length;
+        if (nonEmpty >= 3) {
+          descriptorRow = candidate;
+          break;
+        }
+      }
+      const findDescriptorCol = (aliases) => {
+        for (let i = 0; i < descriptorRow.length; i++) {
+          if (aliases.includes(cleanKey(descriptorRow[i]))) return i;
+        }
+        return -1;
+      };
+
+      const nameColByDescriptor = findDescriptorCol(["nama peserta", "nama"]);
+      const classColByDescriptor = findDescriptorCol(["kelas"]);
+      const statusColByDescriptor = findDescriptorCol(["status", "status kelulusan", "kelulusan"]);
+      const schoolColByDescriptor = findDescriptorCol(["nama sekolah", "sekolah"]);
+
+      const rows = [];
+      for (let i = headerIndex + 1; i < matrix.length; i++) {
+        const source = matrix[i] || [];
+        const nisnValue = normalizeNisn(source[nisnColIndex]);
+        if (!nisnValue) continue;
+
+        const obj = {};
+        for (let j = 0; j < headerRow.length; j++) {
+          const key = String(headerRow[j] || "").trim();
+          if (!key) continue;
+          obj[key] = source[j] ?? "";
+        }
+
+        const nameCol = nameColByDescriptor >= 0 ? nameColByDescriptor : nisnColIndex + 1;
+        const classCol = classColByDescriptor >= 0 ? classColByDescriptor : nisnColIndex + 2;
+        const statusCol = statusColByDescriptor >= 0 ? statusColByDescriptor : nisnColIndex + 4;
+        const schoolCol = schoolColByDescriptor >= 0 ? schoolColByDescriptor : nisnColIndex + 3;
+
+        obj["NISN"] = source[nisnColIndex] ?? "";
+        obj["Nama"] = source[nameCol] ?? "";
+        obj["Kelas"] = source[classCol] ?? "";
+        obj["Status Kelulusan"] = source[statusCol] ?? "";
+        obj["Nama Sekolah"] = schoolCol >= 0 ? (source[schoolCol] ?? "") : "";
+
+        rows.push(obj);
+      }
+
+      return { rows, nisnHeader: headerRow[nisnColIndex] };
+    }
+
+    function renderResult(type, html) {
+      resultBox.className = `result ${type}`;
+      resultBox.innerHTML = html;
+    }
+
+    function clearResult() {
+      resultBox.className = "result";
+      resultBox.innerHTML = "";
+    }
+
+    function setLoadedData(rows, detectedNisnKey) {
+      if (!rows.length) {
+        students = [];
+        nisnKeyName = "";
+        statusText.textContent = "File kosong atau tidak berisi data.";
+        return false;
+      }
+
+      const foundNisnKey = detectedNisnKey || findKey(rows[0], ["nisn"]);
+      if (!foundNisnKey) {
+        students = [];
+        nisnKeyName = "";
+        statusText.textContent = "Kolom NISN tidak ditemukan.";
+        return false;
+      }
+
+      students = rows;
+      nisnKeyName = foundNisnKey;
+      statusText.textContent = `Data berhasil dimuat: ${students.length} siswa.`;
+      return true;
+    }
+
+    async function autoLoadDefaultCsv() {
+      statusText.textContent = "Mencoba memuat data default...";
+      try {
+        const res = await fetch("./kelulusan.cleaned.csv", { cache: "no-store" });
+        if (!res.ok) throw new Error("Gagal mengambil file default.");
+        const text = await res.text();
+        const workbook = XLSX.read(text, { type: "string" });
+        const firstSheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[firstSheetName];
+        const matrix = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
+        const { rows, nisnHeader } = buildRowsFromMatrix(matrix);
+        if (!setLoadedData(rows, nisnHeader)) {
+          statusText.textContent = "Data kelulusan tidak valid. Hubungi admin sekolah.";
+          return;
+        }
+        statusText.textContent += " (otomatis)";
+      } catch (error) {
+        statusText.textContent = "Gagal memuat data kelulusan. Hubungi admin sekolah.";
+      }
+    }
+
+    searchBtn.addEventListener("click", () => {
+      clearResult();
+
+      if (!students.length || !nisnKeyName) {
+        renderResult("error", "<h2>Data belum siap</h2><p>Data kelulusan belum tersedia. Coba lagi sebentar.</p>");
+        return;
+      }
+
+      const query = normalizeNisn(nisnInput.value);
+      if (!query) {
+        renderResult("error", "<h2>NISN kosong</h2><p>Masukkan NISN terlebih dahulu.</p>");
+        return;
+      }
+
+      const student = students.find((row) => normalizeNisn(row[nisnKeyName]) === query);
+      if (!student) {
+        renderResult("error", `<h2>Data tidak ditemukan</h2><p>NISN <strong>${query}</strong> tidak ada pada data.</p>`);
+        return;
+      }
+
+      const nameKey = findKey(student, ["nama", "nama siswa", "nama peserta"]);
+      const statusKey = findKey(student, ["status", "kelulusan", "status kelulusan", "keterangan lulus"]);
+      const classKey = findKey(student, ["kelas"]);
+      const schoolKey = findKey(student, ["sekolah", "nama sekolah"]);
+
+      const name = nameKey ? student[nameKey] : "-";
+      const status = statusKey ? student[statusKey] : "Status belum tersedia";
+      const kelas = classKey ? student[classKey] : "-";
+      const sekolah = schoolKey ? student[schoolKey] : "-";
+      const statusDisplay = `<strong>${status}</strong>`;
+
+      renderResult(
+        "success",
+        `
+          <h2>Hasil Pencarian</h2>
+          <ul>
+            <li><strong>NISN:</strong> ${query}</li>
+            <li><strong>Nama:</strong> ${name}</li>
+            <li><strong>Kelas:</strong> ${kelas}</li>
+            <li><strong>Sekolah:</strong> ${sekolah}</li>
+            <li><strong>Status Kelulusan:</strong> ${statusDisplay}</li>
+          </ul>
+        `
+      );
+    });
+
+    autoLoadDefaultCsv();
+  </script>
+</body>
+</html>
