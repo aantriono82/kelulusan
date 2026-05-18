@@ -126,6 +126,26 @@
                     0 0 8px rgba(34, 197, 94, 0.85);
             }
 
+            .island.csv-ready::before {
+                animation: cameraPulse 1.2s ease-in-out infinite;
+            }
+
+            @keyframes cameraPulse {
+                0%,
+                100% {
+                    opacity: 0.65;
+                    box-shadow:
+                        0 0 0 1px rgba(187, 247, 208, 0.35),
+                        0 0 6px rgba(34, 197, 94, 0.55);
+                }
+                50% {
+                    opacity: 1;
+                    box-shadow:
+                        0 0 0 2px rgba(187, 247, 208, 0.75),
+                        0 0 14px rgba(34, 197, 94, 1);
+                }
+            }
+
             .island::after {
                 content: "";
                 position: absolute;
@@ -891,6 +911,7 @@
             const searchBtn = document.getElementById("searchBtn");
             const statusText = document.getElementById("statusText");
             const resultBox = document.getElementById("resultBox");
+            const island = document.querySelector(".island");
 
             let students = [];
             let nisnKeyName = "";
@@ -1043,6 +1064,7 @@
                 students = rows;
                 nisnKeyName = foundNisnKey;
                 statusText.textContent = `Data berhasil dimuat: ${students.length} siswa.`;
+                island?.classList.add("csv-ready");
                 return true;
             }
 
@@ -1070,9 +1092,10 @@
                     }
                     statusText.textContent += " (otomatis)";
                 } catch (error) {
-                    statusText.textContent =
-                        "Gagal memuat data kelulusan. Hubungi admin sekolah.";
-                }
+                statusText.textContent =
+                    "Gagal memuat data kelulusan. Hubungi admin sekolah.";
+                island?.classList.remove("csv-ready");
+            }
             }
 
             searchBtn.addEventListener("click", () => {
