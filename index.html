@@ -35,11 +35,12 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
+      overflow-x: hidden;
     }
 
     .phone {
       width: 100%;
-      max-width: 360px;
+      max-width: 390px;
       border-radius: 40px;
       background: linear-gradient(180deg, #5b21b6 0%, #6d28d9 100%);
       padding: 10px;
@@ -49,7 +50,7 @@
 
     .app {
       width: 100%;
-      min-height: 740px;
+      min-height: 760px;
       background:
         radial-gradient(240px 180px at 20% 10%, #f8b24a 0%, #f39a32 58%, rgba(243, 154, 50, 0) 59%),
         radial-gradient(280px 230px at 88% 45%, rgba(227, 0, 114, 0.96) 0%, rgba(227, 0, 114, 0) 64%),
@@ -58,7 +59,7 @@
       border: 2px solid #1e3a8a;
       border-radius: 30px;
       position: relative;
-      overflow: visible;
+      overflow: hidden;
       padding: 102px 24px 118px;
     }
 
@@ -222,20 +223,20 @@
     }
 
     .wave-left {
-      width: 250px;
-      height: 300px;
-      left: -88px;
-      bottom: 72px;
+      width: 210px;
+      height: 240px;
+      left: -72px;
+      bottom: 96px;
       border-radius: 48% 52% 40% 60%;
       background: linear-gradient(180deg, rgba(26, 42, 120, 0.95) 0%, rgba(90, 71, 198, 0.88) 100%);
       transform: rotate(24deg);
     }
 
     .wave-mid {
-      width: 225px;
-      height: 190px;
-      left: 78px;
-      bottom: 46px;
+      width: 180px;
+      height: 150px;
+      left: 98px;
+      bottom: 92px;
       border-radius: 57% 43% 56% 44%;
       background: linear-gradient(180deg, rgba(74, 87, 197, 0.92) 0%, rgba(105, 82, 214, 0.88) 100%);
       transform: rotate(-16deg);
@@ -584,10 +585,10 @@
       }
 
       .app {
-        min-height: auto;
-        padding: 88px 14px 18px;
+        min-height: calc(100dvh - 96px);
+        padding: 86px 14px 14px;
         border-radius: 20px;
-        overflow: visible;
+        overflow: hidden;
       }
 
       .ios-search {
@@ -674,6 +675,20 @@
       .dock-item {
         width: 34px;
         height: 34px;
+      }
+
+      .wave-left {
+        width: 180px;
+        height: 210px;
+        left: -82px;
+        bottom: 98px;
+      }
+
+      .wave-mid {
+        width: 145px;
+        height: 125px;
+        left: 104px;
+        bottom: 92px;
       }
     }
   </style>
