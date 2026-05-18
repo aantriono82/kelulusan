@@ -52,10 +52,9 @@
       width: 100%;
       min-height: 760px;
       background:
-        radial-gradient(240px 180px at 20% 10%, #f8b24a 0%, #f39a32 58%, rgba(243, 154, 50, 0) 59%),
-        radial-gradient(280px 230px at 88% 45%, rgba(227, 0, 114, 0.96) 0%, rgba(227, 0, 114, 0) 64%),
-        radial-gradient(250px 190px at 24% 88%, rgba(76, 87, 196, 0.95) 0%, rgba(76, 87, 196, 0) 66%),
-        linear-gradient(155deg, #f6a236 0%, #ef8f31 25%, #cf2c6f 50%, #812aa8 72%, #4848b4 100%);
+        radial-gradient(260px 190px at 18% 10%, #ffc04c 0%, #f5a038 56%, rgba(245, 160, 56, 0) 57%),
+        radial-gradient(320px 250px at 98% 46%, rgba(246, 31, 113, 0.94) 0%, rgba(246, 31, 113, 0) 63%),
+        linear-gradient(160deg, #ff9e2f 0%, #ff7a2f 24%, #f23b72 50%, #c0188a 72%, #7f1db6 100%);
       border: 2px solid #1e3a8a;
       border-radius: 30px;
       position: relative;
@@ -223,23 +222,33 @@
     }
 
     .wave-left {
-      width: 210px;
-      height: 240px;
-      left: -72px;
-      bottom: 96px;
-      border-radius: 48% 52% 40% 60%;
-      background: linear-gradient(180deg, rgba(26, 42, 120, 0.95) 0%, rgba(90, 71, 198, 0.88) 100%);
-      transform: rotate(24deg);
+      width: 360px;
+      height: 220px;
+      left: -86px;
+      bottom: 86px;
+      border-radius: 52% 48% 0 0 / 100% 100% 0 0;
+      background: linear-gradient(180deg, rgba(74, 30, 164, 0.9) 0%, rgba(95, 37, 191, 0.94) 100%);
+      transform: rotate(-8deg);
     }
 
     .wave-mid {
-      width: 180px;
-      height: 150px;
-      left: 98px;
-      bottom: 92px;
-      border-radius: 57% 43% 56% 44%;
-      background: linear-gradient(180deg, rgba(74, 87, 197, 0.92) 0%, rgba(105, 82, 214, 0.88) 100%);
-      transform: rotate(-16deg);
+      width: 300px;
+      height: 170px;
+      left: 44px;
+      bottom: 72px;
+      border-radius: 58% 42% 0 0 / 100% 100% 0 0;
+      background: linear-gradient(180deg, rgba(229, 9, 143, 0.88) 0%, rgba(165, 35, 216, 0.92) 100%);
+      transform: rotate(7deg);
+    }
+
+    .wave-bottom {
+      width: 360px;
+      height: 130px;
+      left: -6px;
+      bottom: -34px;
+      border-radius: 55% 45% 0 0 / 100% 100% 0 0;
+      background: linear-gradient(180deg, rgba(131, 27, 199, 0.95) 0%, rgba(104, 20, 176, 0.98) 100%);
+      transform: rotate(-2deg);
     }
 
     .page-dots {
@@ -678,17 +687,24 @@
       }
 
       .wave-left {
-        width: 180px;
-        height: 210px;
-        left: -82px;
-        bottom: 98px;
+        width: 320px;
+        height: 200px;
+        left: -98px;
+        bottom: 86px;
       }
 
       .wave-mid {
-        width: 145px;
-        height: 125px;
-        left: 104px;
-        bottom: 92px;
+        width: 270px;
+        height: 150px;
+        left: 40px;
+        bottom: 74px;
+      }
+
+      .wave-bottom {
+        width: 320px;
+        height: 120px;
+        left: -10px;
+        bottom: -30px;
       }
     }
   </style>
@@ -710,6 +726,7 @@
     <div class="shape-bottom"></div>
     <div class="wallpaper-wave wave-left"></div>
     <div class="wallpaper-wave wave-mid"></div>
+    <div class="wallpaper-wave wave-bottom"></div>
     <div class="ios-search"><span class="ios-search-icon"></span>Search</div>
 
     <h1>Pengumuman Kelulusan<br>Kelas 9<br>SMP Negeri 2 Bangunrejo</h1>
