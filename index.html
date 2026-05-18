@@ -252,13 +252,12 @@
     }
 
     .page-dots {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 102px;
+      position: relative;
       display: flex;
+      justify-content: center;
       gap: 6px;
-      z-index: 2;
+      z-index: 6;
+      margin: 10px 0 8px;
       pointer-events: none;
     }
 
@@ -676,10 +675,7 @@
       }
 
       .page-dots {
-        position: static;
-        transform: none;
-        justify-content: center;
-        margin: 8px 0;
+        margin: 8px 0 7px;
       }
 
       .ios-dock {
