@@ -58,7 +58,7 @@
       border: 2px solid #1e3a8a;
       border-radius: 30px;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       padding: 102px 24px 118px;
     }
 
@@ -465,6 +465,16 @@
       line-height: 1.2;
     }
 
+    .result-status {
+      margin: 0 0 8px;
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(13, 148, 136, 0.14);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
     .result ul {
       margin: 0;
       padding-left: 18px;
@@ -477,10 +487,12 @@
     }
 
     .ios-dock {
-      position: absolute;
-      left: 34px;
-      right: 34px;
-      bottom: 26px;
+      position: static;
+      left: auto;
+      right: auto;
+      bottom: auto;
+      margin: 10px auto 0;
+      width: 88%;
       height: 60px;
       border-radius: 19px;
       background: linear-gradient(180deg, #ff00b8 0%, #e20093 100%);
@@ -565,24 +577,103 @@
 
     @media (max-width: 420px) {
       .phone {
-        max-width: 340px;
+        max-width: none;
+        width: 100%;
+        border-radius: 24px;
+        padding: 6px;
       }
 
       .app {
-        padding: 82px 18px 24px;
+        min-height: auto;
+        padding: 88px 14px 18px;
+        border-radius: 20px;
+        overflow: visible;
       }
 
-      .ios-dock {
-        left: 28px;
-        right: 28px;
+      .ios-search {
+        width: 92%;
+        margin-bottom: 10px;
       }
 
       h1 {
-        font-size: 18px;
+        font-size: 15px;
+        margin-bottom: 4px;
       }
 
       p {
+        font-size: 12px;
+        margin-bottom: 8px;
+      }
+
+      .avatar-wrap {
+        margin: 10px 0 8px;
+      }
+
+      .avatar {
+        width: 76px;
+        max-height: 76px;
+      }
+
+      .grid {
+        margin-top: 8px;
+        gap: 8px;
+      }
+
+      input[type="text"] {
+        width: 96%;
+        font-size: 16px;
+        padding: 8px 12px;
+      }
+
+      button {
+        width: 58%;
+        font-size: 16px;
+        padding: 8px 10px;
+        margin-top: 10px;
+      }
+
+      .helper-link {
+        margin-top: 8px;
+        font-size: 12px;
+      }
+
+      .status {
+        margin-top: 8px;
+        font-size: 11px;
+      }
+
+      .result {
+        margin-top: 10px;
+        padding: 10px;
+      }
+
+      .result h2 {
+        font-size: 16px;
+        margin-bottom: 6px;
+      }
+
+      .result-status {
+        font-size: 12px;
+        margin-bottom: 6px;
+      }
+
+      .result ul {
         font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .page-dots {
+        position: static;
+        transform: none;
+        justify-content: center;
+        margin: 8px 0;
+      }
+
+      .ios-dock { height: 54px; padding: 0 12px; }
+
+      .dock-item {
+        width: 34px;
+        height: 34px;
       }
     }
   </style>
@@ -818,7 +909,8 @@
       const schoolKey = findKey(student, ["sekolah", "nama sekolah"]);
 
       const name = nameKey ? student[nameKey] : "-";
-      const status = statusKey ? student[statusKey] : "Status belum tersedia";
+      const rawStatus = statusKey ? String(student[statusKey] || "").trim() : "";
+      const status = rawStatus || "LULUS";
       const kelas = classKey ? student[classKey] : "-";
       const sekolah = schoolKey ? student[schoolKey] : "-";
       const statusDisplay = `<strong>${status}</strong>`;
@@ -827,6 +919,7 @@
         "success",
         `
           <h2>Hasil Pencarian</h2>
+          <div class="result-status">Status Kelulusan: ${statusDisplay}</div>
           <ul>
             <li><strong>NISN:</strong> ${query}</li>
             <li><strong>Nama:</strong> ${name}</li>
