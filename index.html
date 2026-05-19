@@ -110,49 +110,54 @@
                 position: relative;
                 flex: 0 0 auto;
                 opacity: 1;
-                box-shadow:
-                    0 0 0 1px rgba(255, 255, 255, 0.9),
-                    0 1px 2px rgba(15, 23, 42, 0.45);
-                background: rgba(15, 23, 42, 0.34);
+                box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45);
             }
 
             .status-wa {
-                border: 1.8px solid #ffffff;
-                overflow: visible;
+                background: #25d366;
+                overflow: hidden;
             }
 
             .status-wa::before {
-                content: "WA";
+                content: "";
                 position: absolute;
+                width: 10px;
+                height: 10px;
+                border: 1.7px solid #fff;
+                border-left-color: transparent;
+                border-top-color: transparent;
+                border-radius: 50%;
                 top: 2px;
-                left: 2px;
-                font-size: 7px;
-                line-height: 1;
-                font-weight: 800;
-                color: #fff;
-                letter-spacing: 0;
+                left: 3px;
+                transform: rotate(18deg);
             }
 
             .status-wa::after {
-                content: none;
+                content: "";
                 position: absolute;
+                width: 4px;
+                height: 4px;
+                background: #fff;
+                clip-path: polygon(0 0, 100% 40%, 0 100%);
+                bottom: 1px;
+                left: 2px;
             }
 
             .status-tg {
-                border: 1.8px solid #ffffff;
+                background: #28a8ea;
                 overflow: hidden;
             }
 
             .status-tg::before {
                 content: "";
                 position: absolute;
-                width: 9px;
-                height: 7px;
+                width: 10px;
+                height: 9px;
                 background: #ffffff;
-                clip-path: polygon(0 52%, 100% 0, 62% 100%, 45% 65%);
-                top: 4px;
+                clip-path: polygon(0 54%, 100% 0, 63% 100%, 47% 66%);
+                top: 3px;
                 left: 3px;
-                transform: rotate(-7deg);
+                transform: rotate(-8deg);
             }
 
             .island {
