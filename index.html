@@ -93,6 +93,71 @@
                 pointer-events: none;
             }
 
+            .status-left {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .status-time {
+                font-weight: 700;
+            }
+
+            .status-app {
+                width: 13px;
+                height: 13px;
+                border-radius: 50%;
+                position: relative;
+                flex: 0 0 auto;
+                opacity: 0.95;
+            }
+
+            .status-wa {
+                border: 1.6px solid #ffffff;
+            }
+
+            .status-wa::before {
+                content: "";
+                position: absolute;
+                width: 6px;
+                height: 6px;
+                border: 1.6px solid #ffffff;
+                border-left-color: transparent;
+                border-top-color: transparent;
+                border-radius: 50%;
+                top: 2px;
+                left: 2px;
+                transform: rotate(20deg);
+            }
+
+            .status-wa::after {
+                content: "";
+                position: absolute;
+                width: 3px;
+                height: 3px;
+                background: #ffffff;
+                clip-path: polygon(0 0, 100% 45%, 0 100%);
+                bottom: -1px;
+                left: 2px;
+            }
+
+            .status-tg {
+                border: 1.6px solid #ffffff;
+                overflow: hidden;
+            }
+
+            .status-tg::before {
+                content: "";
+                position: absolute;
+                width: 8px;
+                height: 8px;
+                background: #ffffff;
+                clip-path: polygon(0 52%, 100% 0, 58% 100%, 45% 64%);
+                top: 2px;
+                left: 2px;
+                transform: rotate(-6deg);
+            }
+
             .island {
                 position: absolute;
                 top: 22px;
@@ -832,7 +897,11 @@
     <body>
         <div class="phone">
             <div class="iphone-status">
-                <div>12:00</div>
+                <div class="status-left">
+                    <span class="status-time">12:00</span>
+                    <span class="status-app status-wa" aria-hidden="true"></span>
+                    <span class="status-app status-tg" aria-hidden="true"></span>
+                </div>
                 <div class="status-right">
                     <div class="network-label">5G</div>
                     <div class="signal">
