@@ -104,24 +104,26 @@
             }
 
             .status-app {
-                width: 13px;
-                height: 13px;
+                width: 15px;
+                height: 15px;
                 border-radius: 50%;
                 position: relative;
                 flex: 0 0 auto;
-                opacity: 0.95;
+                opacity: 1;
+                background: rgba(15, 23, 42, 0.28);
+                box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
             }
 
             .status-wa {
-                border: 1.6px solid #ffffff;
+                border: 1.8px solid #ffffff;
             }
 
             .status-wa::before {
                 content: "";
                 position: absolute;
-                width: 6px;
-                height: 6px;
-                border: 1.6px solid #ffffff;
+                width: 7px;
+                height: 7px;
+                border: 1.8px solid #ffffff;
                 border-left-color: transparent;
                 border-top-color: transparent;
                 border-radius: 50%;
@@ -133,8 +135,8 @@
             .status-wa::after {
                 content: "";
                 position: absolute;
-                width: 3px;
-                height: 3px;
+                width: 4px;
+                height: 4px;
                 background: #ffffff;
                 clip-path: polygon(0 0, 100% 45%, 0 100%);
                 bottom: -1px;
@@ -142,15 +144,15 @@
             }
 
             .status-tg {
-                border: 1.6px solid #ffffff;
+                border: 1.8px solid #ffffff;
                 overflow: hidden;
             }
 
             .status-tg::before {
                 content: "";
                 position: absolute;
-                width: 8px;
-                height: 8px;
+                width: 9px;
+                height: 9px;
                 background: #ffffff;
                 clip-path: polygon(0 52%, 100% 0, 58% 100%, 45% 64%);
                 top: 2px;
